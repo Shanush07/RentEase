@@ -1,0 +1,292 @@
+/* --- Fullscreen container --- */
+.active-ride-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd856, #151515);
+  padding: 20px;
+  font-family: var(--default-font);
+  overflow: hidden;
+  animation: fadeInContainer 0.8s ease-out forwards;
+}
+
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd856, #151515);
+  font-family: var(--default-font);
+  opacity: 0;
+  animation: fadeInPage 0.6s ease-in forwards;
+  transition: opacity 0.4s ease;
+}
+
+.page-wrapper.fade-out {
+  opacity: 0;
+}
+
+@keyframes fadeInContainer {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Card with floating & glow effect --- */
+.ride-card.futuristic-card {
+  background: rgba(17, 17, 17, 0.85);
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(241, 196, 15, 0.4),
+              0 8px 20px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #fff;
+  position: relative;
+  animation: cardEntrance 0.8s ease-out forwards, floatCard 6s ease-in-out infinite 0.8s;
+  opacity: 1;
+  animation-fill-mode: forwards;
+  backdrop-filter: blur(10px);
+  transition: box-shadow 0.4s;
+}
+
+.ride-card.futuristic-card:hover {
+  box-shadow: 0 0 25px rgba(241, 196, 15, 0.6);
+}
+
+@keyframes cardEntrance {
+  0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* --- Cycle Type Header --- */
+.cycle-type {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 700;
+  color: #f1c40f;
+  text-shadow: 0 0 6px #f1c40f, 0 0 12px #f39c12;
+  opacity: 0;
+  animation: fadeInText 0.8s ease-out forwards 0.5s;
+}
+
+@keyframes fadeInText {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Info grid --- */
+.ride-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 110px;
+  gap: 15px;
+  margin: 25px;
+}
+
+.ride-section {
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  opacity: 0;
+  animation: sectionFadeIn 0.6s ease-out forwards;
+}
+
+.ride-section:nth-child(1) { animation-delay: 0.6s; }
+.ride-section:nth-child(2) { animation-delay: 0.75s; }
+.ride-section:nth-child(3) { animation-delay: 0.9s; }
+.ride-section:nth-child(4) { animation-delay: 1.05s; }
+
+@keyframes sectionFadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.ride-section:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 8px #f1c40f, 0 0 1px #f39c12;
+}
+
+.ride-section h4 { margin: 0 0 6px 0; font-size: 0.85rem; }
+.ride-section p { margin: 0; font-size: 1.05rem; font-weight: bold; }
+.icon { font-size: 1.3rem; margin-bottom: 6px; color: #f1c40f; text-shadow: 0 0 6px #f1c40f; }
+
+.ride-section.started { background-color: #f39c12; color: #111; }
+.ride-section.elapsed { background-color: #f1c40f; color: #111; }
+.ride-section.fare { background-color: #f39c12; color: #111; }
+.ride-section.status { background-color: #f1c40f; color: #111; }
+
+.status-active { color: #0f0; text-shadow: 0 0 6px #0f0, 0 0 12px #0f0; }
+.status-ended { color: #f00; text-shadow: 0 0 6px #f00, 0 0 12px #f00; }
+
+.timer { animation: pulse 1.5s infinite; }
+@keyframes pulse { 
+  0%,100%{ text-shadow:0 0 4px #f1c40f; } 
+  50%{ text-shadow:0 0 12px #f39c12; } 
+}
+
+.end-ride-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #f1c40f, #f39c12);
+  border: none;
+  border-radius: 25px;
+  color: #111;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.4s ease, background 0.4s ease;
+  box-shadow: 0 0 15px rgba(241, 196, 15, 0.6), 0 0 30px rgba(243, 156, 18, 0.3);
+  opacity: 0;
+  animation: fadeInButton 0.8s ease-out forwards 1.2s;
+}
+
+.end-ride-btn:hover {
+  transform: scale(1.06);
+  background: linear-gradient(90deg, #f39c12, #f1c40f);
+  box-shadow: 0 0 25px rgba(241, 196, 15, 0.8), 0 0 45px rgba(243, 156, 18, 0.5);
+}
+
+/* --- No Ride Page (Enhanced) --- */
+.no-ride-page {
+  background: radial-gradient(circle at 30% 30%, #2d2d2d, #0a0a0a 90%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.no-ride-card {
+  background: rgba(20, 20, 20, 0.85);
+  border-radius: 25px;
+  padding: 40px 25px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(241, 196, 15, 0.2),
+              inset 0 0 15px rgba(243, 156, 18, 0.15);
+  backdrop-filter: blur(10px);
+  animation: cardFloat 6s ease-in-out infinite, fadeInContainer 1s ease-out;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Floating hologram --- */
+.cycle-hologram {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(241,196,15,0.25) 0%, transparent 70%);
+  box-shadow: 0 0 25px rgba(241,196,15,0.4), inset 0 0 25px rgba(243,156,18,0.3);
+  position: relative;
+  animation: hologramGlow 2.5s ease-in-out infinite;
+}
+
+.cycle-hologram::after {
+  content: "🚲";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.2);
+  font-size: 2.8rem;
+  color: #f1c40f;
+  text-shadow: 0 0 12px #f39c12, 0 0 24px #f1c40f;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes hologramGlow {
+  0%, 100% { opacity: 0.8; box-shadow: 0 0 20px rgba(241,196,15,0.3); }
+  50% { opacity: 1; box-shadow: 0 0 35px rgba(241,196,15,0.6); }
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translate(-50%, -50%) scale(1.1); }
+  50% { transform: translate(-50%, -60%) scale(1.2); }
+}
+
+.no-ride-title {
+  color: #f1c40f;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px #f1c40f, 0 0 24px #f39c12;
+}
+
+.no-ride-subtitle {
+  color: #dfe6e9;
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 25px;
+}
+
+/* --- Book Ride Button --- */
+.book-ride-btn {
+  background: linear-gradient(90deg, #f1c40f, #f39c12);
+  border: none;
+  border-radius: 25px;
+  color: #111;
+  padding: 14px 32px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
+}
+
+.book-ride-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(241, 196, 15, 0.8);
+  background: linear-gradient(90deg, #f39c12, #f1c40f);
+}
+
+/* --- Floating card animation --- */
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInButton {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- Responsive --- */
+@media (max-width: 450px) {
+  .ride-info-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 100px;
+  }
+  .active-ride-container h2 {
+    font-size: 1.3rem;
+  }
+  .active-ride-container p {
+    font-size: 0.95rem;
+  }
+}

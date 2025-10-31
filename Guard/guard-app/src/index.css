@@ -1,0 +1,91 @@
+/* ==================== Reset & Global ==================== */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #000;
+  color: rgba(255, 255, 255, 0.87);
+  overflow-x: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  font-family: "SuperComin", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== Layout ==================== */
+.app-content {
+  flex: 1; /* Push footer down */
+}
+
+/* ==================== Fonts ==================== */
+@font-face {
+  font-family: "Digitalt";
+  src: url("./assets/Fonts/Devia.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SuperComin";
+  src: url("./assets/Fonts/Valorant.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==================== Typography ==================== */
+h1, h2 {
+  font-family: "SuperComin", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: "Digitalt", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================== Links ==================== */
+a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+a:hover {
+  color: #FFD700;
+}
+
+/* ==================== Scrollbar Styling (Webkit Browsers) ==================== */
+::-webkit-scrollbar {
+  width: 10px;                /* scrollbar width */
+  height: 10px;               /* scrollbar height (for horizontal) */
+}
+
+::-webkit-scrollbar-track {
+  background: #111;           /* background of track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFD700;        /* scrollbar color */
+  border-radius: 6px;
+  border: 2px solid #111;     /* gives padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f39c12;        /* hover color */
+}
+
+/* ==================== Firefox ==================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FFD700 #111;
+}
+

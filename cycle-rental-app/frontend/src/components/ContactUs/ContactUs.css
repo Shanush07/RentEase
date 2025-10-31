@@ -1,0 +1,89 @@
+/* Outer container */
+.contact-us-container {
+  position: relative;
+  width: 177vh;
+  margin: 20px;
+  padding: 80px 40px;
+  background: linear-gradient(145deg, #111, #1a1a1a);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Animated overlay (like particles) */
+.contact-us-container .overlay {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 1px, transparent 1px);
+  background-size: 8px 8px;
+  animation: spark 2s linear infinite;
+}
+
+@keyframes spark {
+  0% { background-position: 0 0; }
+  100% { background-position: 80px 80px; }
+}
+
+/* Inner wrapper for clean content */
+.contact-us-content-wrapper {
+  position: relative;
+  z-index: 2; /* above overlay */
+  width: 100%;
+  max-width: 1200px;
+  padding: 60px;
+  background: linear-gradient(135deg, #1a1a1a, #222);
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  animation: fadeInUpContent 1s ease forwards;
+}
+
+/* Content */
+.contact-us-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #ffd700;
+  font-family: "SuperComin", sans-serif;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  margin-bottom: 30px;
+  animation: fadeInUpTitle 1s ease 0.3s forwards;
+}
+
+.contact-us-content p {
+  font-size: 1.3rem;
+  color: #fff;
+  font-family: "Digitalt", sans-serif;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Animations */
+@keyframes fadeInUpContent {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUpTitle {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-us-content-wrapper { padding: 40px 20px; }
+  .contact-us-title { font-size: 2.2rem; }
+  .contact-us-content p { font-size: 1.1rem; }
+}
+
+@media (max-width: 480px) {
+  .contact-us-content-wrapper { padding: 30px 15px; }
+  .contact-us-title { font-size: 1.8rem; }
+  .contact-us-content p { font-size: 1rem; }
+}

@@ -1,0 +1,158 @@
+/* ===========================
+   Guard Check Page Styles
+   =========================== */
+
+/* Full page container */
+.guard-check-container {
+  min-height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000; /* Solid black background */
+  padding: 20px;
+  font-family: var(--default-font);
+  overflow: hidden;
+}
+
+/* Main card container */
+.guard-card {
+  background: #111;
+  border-radius: 25px;
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 25px rgba(241, 196, 15, 0.4), 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+/* Verified state styling */
+.guard-card.verified {
+  background: #0f0c0c;
+  box-shadow: 0 0 20px #0f0, 0 0 10px #0f0c0c;
+}
+
+/* Fade in / out transitions */
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  transition: opacity 0.4s ease;
+}
+.page-wrapper.fade-out { opacity: 0; }
+.page-wrapper.fade-in { opacity: 1; }
+
+/* Title styling */
+.guard-title {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #f1c40f;
+  text-shadow: 0 0 6px #f1c40f, 0 0 12px #f39c12;
+}
+
+/* QR Section wrapper */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* Placeholder box for QR code */
+.qr-placeholder {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  background: #222;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Keeps "QR CODE" text centered */
+  color: #f1c40f;
+  font-weight: 700;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px #f1c40f, 0 0 2px #f39c12;
+  margin-bottom: 10px;
+  animation: pulse 1.5s infinite; /* Glow effect */
+}
+
+/* Instruction text */
+.instruction {
+  font-size: 0.9rem;
+  color: #f1c40f;
+}
+
+/* Buttons (Verify & Back) */
+.verify-btn,
+.back-btn {
+  width: 100%;
+  padding: 14px 0;
+  background-color: #f1c40f;
+  border: none;
+  border-radius: 20px;
+  color: #111;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 0 6px #f1c40f;
+  margin-top: 15px;
+}
+.verify-btn:hover,
+.back-btn:hover {
+  background-color: #f39c12;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #f1c40f;
+}
+
+/* Confirmation Section (after success) */
+.confirmation-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Success Icon (can be replaced with ✔ text) */
+.icon-success {
+  font-size: 4rem;
+  margin-top: 20px;
+  color: #0f0;
+  text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+}
+
+/* Glow/Pulse animation for QR box */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 6px #f1c40f; }
+  50% { box-shadow: 0 0 20px #f39c12; }
+}
+
+/* Background spark overlay (decorative) */
+.spark-overlay {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(241,196,15,0.1) 1px, transparent 1px);
+  background-size: 10px 10px;
+  animation: spark 3s linear infinite;
+}
+@keyframes spark {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 450px) {
+  .qr-placeholder {
+    width: 160px;
+    height: 160px;
+    font-size: 1rem;
+  }
+}

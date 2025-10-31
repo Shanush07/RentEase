@@ -1,0 +1,340 @@
+/* ==================== Navbar ==================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(14px);
+  padding: 14px 40px;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+  animation: fadeDown 0.7s ease-out;
+}
+
+/* ==================== Nav Items ==================== */
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Center items when signed out */
+.nav-items.signedout {
+  justify-content: center;
+  width: 100%;
+}
+
+/* Spread out when signed in */
+.nav-items.signedin {
+  justify-content: center;
+  flex: 1;
+}
+
+/* ==================== Navbar Links ==================== */
+.navbar a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #FFD700;
+  font-weight: 600;
+  font-family: "SuperComin", sans-serif;
+  text-decoration: none;
+  padding: 6px 12px;
+  font-size: 1.15rem;
+  transition: color 0.3s ease, transform 0.25s ease, text-shadow 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+}
+
+/* Underline animation */
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #FFD700;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.navbar a:hover::after,
+.navbar a.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ==================== Auth Button ==================== */
+.navbar .auth-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Digitalt", sans-serif;
+  font-weight: 600;
+  color: #FFD700;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid #FFD700;
+  border-radius: 30px;
+  padding: 7px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-align: center;
+  margin: 0.4em;
+}
+
+.navbar .auth-btn:hover {
+  background: rgba(255, 215, 0, 0.25);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+}
+
+/* ==================== User Avatar ==================== */
+.cl-userButton-root {
+  width: 40px !important;
+  height: 40px !important;
+  border: 3px solid #FFD700 !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  vertical-align: middle !important;
+  box-sizing: border-box !important;
+  transition: transform 0.25s ease, box-shadow 0.3s ease !important;
+}
+
+.cl-userButton-root:hover {
+  transform: scale(1.06) !important;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7) !important;
+}
+
+.cl-userButton-root * {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.cl-userButton-root img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  display: block !important;
+}
+
+/* Desktop avatar */
+.profile-desktop {
+  margin-left: auto;
+}
+
+.user-avatar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ==================== Hamburger ==================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  z-index: 1100;
+  position: relative;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  background: #FFD700;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ==================== Mobile Menu ==================== */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100vh;
+  width: 280px;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  padding: 80px 25px 25px 25px;
+  gap: 25px;
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 1050;
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-menu.open {
+  right: 0;
+}
+
+.mobile-menu a {
+  color: #FFD700;
+  font-weight: 600;
+  font-family: "SuperComin", sans-serif;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+  padding-left: 10px;
+}
+
+/* Mobile profile section */
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0 20px 0;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+  margin-bottom: 10px;
+}
+
+.profile-section .cl-userButton-root {
+  width: 45px !important;
+  height: 45px !important;
+  border: 2px solid #FFD700 !important;
+}
+
+.profile-text {
+  color: #FFD700;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: "SuperComin", sans-serif;
+}
+
+/* Mobile Menu Backdrop */
+.mobile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  backdrop-filter: blur(2px);
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeDown {
+  from { 
+    transform: translateY(-20px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes popIn {
+  from { 
+    transform: scale(0.9); 
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+/* ==================== Responsive ==================== */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+  
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: flex !important;
+  }
+  
+  .hamburger {
+    display: flex;
+  }
+  
+  .mobile-menu {
+    width: 260px;
+    padding: 70px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+  
+  .mobile-menu {
+    width: 240px;
+    padding: 60px 18px 18px 18px;
+  }
+  
+  .hamburger {
+    width: 25px;
+    height: 18px;
+  }
+  
+  .hamburger span {
+    height: 2px;
+  }
+}

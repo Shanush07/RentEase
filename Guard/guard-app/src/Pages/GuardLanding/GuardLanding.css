@@ -1,0 +1,105 @@
+/* ==================== Container ==================== */
+.landing-container {
+  min-height: calc(100vh - 65px); /* accounts for navbar */
+  padding-top: 65px; /* prevents overlap with navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* allows overlay positioning */
+  overflow: hidden;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* ==================== Spark Overlay ==================== */
+.landing-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 215, 0, 0.35) 1.5px, transparent 2px);
+  background-size: 50px 50px;
+  animation: sparkMove 6s linear infinite;
+  opacity: 0.25;
+  z-index: 1;
+}
+
+@keyframes sparkMove {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
+}
+
+/* ==================== Content Wrapper ==================== */
+.landing-content-wrapper {
+  position: relative;
+  z-index: 2; /* above spark overlay */
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.55); /* translucent */
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);
+  max-width: 1000px;   /* widened container */
+  width: 100%;          /* responsive width */
+  margin: 80px auto;
+}
+
+/* ==================== Title ==================== */
+.landing-title {
+  font-size: 3.5rem;
+  color: #FFD700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  margin-bottom: 3rem;
+  font-family: "SuperComin", sans-serif;
+}
+
+/* ==================== Action Buttons ==================== */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.action-card {
+  background: rgba(255, 215, 0, 0.08);
+  border: 2px solid #FFD700;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 160px;
+  height: 160px;
+  font-family: "SuperComin", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.25s ease;
+  box-shadow: none;
+  color: #FFD700;
+  text-decoration: none;
+}
+
+.action-card svg {
+  color: #FFD700;
+  margin-bottom: 0.75rem;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.action-card span {
+  color: #FFD700;
+  font-size: 1.2rem;
+  transition: color 0.25s ease;
+}
+
+.action-card:hover {
+  background: #FFD700;
+  transform: scale(1.06);
+  box-shadow: 0 0 15px 4px rgba(255, 215, 0, 0.8);
+  cursor: pointer;
+}
+
+.action-card:hover svg,
+.action-card:hover span {
+  color: #000;
+  transform: scale(1.1);
+}

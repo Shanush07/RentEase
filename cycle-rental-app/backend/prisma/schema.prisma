@@ -1,0 +1,115 @@
+// -------------
+// Generator & Data Source
+// -------------
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------
+// Models
+// -------------
+
+model Student {
+  student_id    String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  phone         String?
+  password_hash String
+  college_id    String?
+  status        String?  @default("ACTIVE")
+  created_at    DateTime @default(now())
+
+  rentalSessions RentalSession[]
+}
+
+model Guard {
+  guard_id   String   @id @default(uuid())
+  name       String
+  phone      String?
+  status     String?  @default("ACTIVE")
+  created_at DateTime @default(now())
+
+  station_id String
+  station    Station @relation(fields: [station_id], references: [station_id])
+
+  qrcodes    QRCode[]
+  startRides RentalSession[] @relation("StartGuard")
+  endRides   RentalSession[] @relation("EndGuard")
+}
+
+model Station {
+  station_id       String   @id @default(uuid())
+  name             String
+  capacity         Int
+  available_cycles Int
+  status           String?  @default("ACTIVE")
+  created_at       DateTime @default(now())
+
+  guards        Guard[]
+  qrcodes       QRCode[]
+  startSessions RentalSession[] @relation("StartStation")
+  endSessions   RentalSession[] @relation("EndStation")
+}
+
+model QRCode {
+  qr_id      String   @id @default(uuid())
+  token      String
+  expires_at DateTime
+  created_at DateTime @default(now())
+
+  guard_id   String
+  station_id String
+
+  guard   Guard   @relation(fields: [guard_id], references: [guard_id])
+  station Station @relation(fields: [station_id], references: [station_id])
+
+  startSession RentalSession[] @relation("StartQRCode")
+  endSession   RentalSession[] @relation("EndQRCode")
+}
+
+model RentalSession {
+  session_id    String    @id @default(uuid())
+  start_time    DateTime?
+  end_time      DateTime?
+  status        String?   @default("PENDING")
+  billed_amount Decimal?  @db.Decimal(10, 2)
+  paid_amount   Decimal?  @db.Decimal(10, 2)
+  due_date      DateTime?
+  created_at    DateTime  @default(now())
+
+  student_id       String
+  start_station_id String
+  end_station_id   String?
+  start_guard_id   String
+  end_guard_id     String?
+  start_qr_id      String
+  end_qr_id        String?
+
+  student      Student  @relation(fields: [student_id], references: [student_id])
+  startStation Station  @relation("StartStation", fields: [start_station_id], references: [station_id])
+  endStation   Station? @relation("EndStation", fields: [end_station_id], references: [station_id])
+  startGuard   Guard    @relation("StartGuard", fields: [start_guard_id], references: [guard_id])
+  endGuard     Guard?   @relation("EndGuard", fields: [end_guard_id], references: [guard_id])
+  startQRCode  QRCode   @relation("StartQRCode", fields: [start_qr_id], references: [qr_id])
+  endQRCode    QRCode?  @relation("EndQRCode", fields: [end_qr_id], references: [qr_id])
+
+  payment Payment?
+}
+
+model Payment {
+  payment_id  String    @id @default(uuid())
+  amount      Decimal   @db.Decimal(10, 2)
+  method      String?
+  status      String?   @default("PENDING")
+  gateway_ref String?
+  created_at  DateTime  @default(now())
+  paid_at     DateTime?
+
+  session_id String        @unique
+  session    RentalSession @relation(fields: [session_id], references: [session_id])
+}

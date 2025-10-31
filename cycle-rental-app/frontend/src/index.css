@@ -1,0 +1,132 @@
+/* ==================== Scoped Global Styles ==================== */
+/* Apply to text and layout only, not buttons/links */
+#root *:not(navbar, .navbar *, button, a),
+#root *::before,
+#root *::after {
+  box-sizing: border-box;
+}
+
+#root {
+  font-family: "SuperComin", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000; /* pure black background */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+}
+
+/* ==================== Fonts ==================== */
+@font-face {
+  font-family: "Digitalt";
+  src: url("./assets/Fonts/Devia.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SuperComin";
+  src: url("./assets/Fonts/Valorant.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==================== Text Elements ==================== */
+#root h1, 
+#root h2 {
+  font-family: "SuperComin", sans-serif;
+  color: rgba(255,255,255,0.87);
+  margin: 0;
+  padding: 0;
+}
+
+#root p {
+  font-family: "Digitalt", sans-serif;
+  color: rgba(255,255,255,0.87);
+  margin: 0;
+  padding: 0;
+}
+
+/* Default anchor styles (for normal text links) */
+#root a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+#root a:hover {
+  color: #FFD700;
+}
+
+/* ==================== Button spacing ==================== */
+/* Apply margin only to normal buttons, not navbar or Clerk */
+#root button:not(.auth-btn):not(.clerk-modal *) {
+  font-family: "SuperComin", sans-serif;
+  margin-top: 2.8em; /* adjust globally if needed */
+}
+
+/* ==================== Body & Layout ==================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden; /* prevent horizontal scroll / white strips */
+  background-color: #000; 
+}
+
+/* ==================== Dark/Light Mode ==================== */
+@media (prefers-color-scheme: light) {
+  #root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  #root a:hover {
+    color: #747bff;
+  }
+}
+
+/* ==================== Clerk Modal Reset ==================== */
+/* Prevent global styles from affecting Clerk popup */
+.clerk-modal,
+.clerk-modal * {
+  all: unset; /* removes inherited styles */
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ==================== Scrollbar Styling (Webkit Browsers) ==================== */
+::-webkit-scrollbar {
+  width: 10px;                /* scrollbar width */
+  height: 10px;               /* scrollbar height (for horizontal) */
+}
+
+::-webkit-scrollbar-track {
+  background: #111;           /* background of track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFD700;        /* scrollbar color */
+  border-radius: 6px;
+  border: 2px solid #111;     /* gives padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f39c12;        /* hover color */
+}
+
+/* ==================== Firefox ==================== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FFD700 #111;
+}

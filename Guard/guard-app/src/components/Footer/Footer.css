@@ -1,0 +1,51 @@
+.app-footer {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 60px 40px;
+  background: #111;
+  color: #FFD700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+.footer-content h2 {
+  font-family: "SuperComin", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.footer-content p {
+  font-size: 1rem;
+  color: rgba(255, 215, 0, 0.8);
+  margin: 5px 0;
+}
+
+/* Glow */
+.footer-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 215, 0, 0.05),
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 215, 0, 0.05)
+  );
+  z-index: 0;
+  animation: glowMove 8s linear infinite;
+}
+
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.footer-content {
+  position: relative;
+  z-index: 1;
+}

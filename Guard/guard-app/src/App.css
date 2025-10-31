@@ -1,0 +1,12 @@
+/* ==================== App Layout ==================== */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ensures footer sticks to bottom */
+}
+
+.app-content {
+  flex: 1; /* makes main content grow and push footer down */
+  display: flex;
+  flex-direction: column;
+}
