@@ -10,6 +10,7 @@ export default function UserDashboard() {
   const [studentData, setStudentData] = useState(null);
   const { user } = useUser();
   const { getToken } = useAuth(); // ✅ Clerk auth hook
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   // 🔁 Carousel rotation
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function UserDashboard() {
         // ✅ Get Clerk JWT token for authentication
         const token = await getToken({ template: "default" });
 
-        const res = await fetch(`http://localhost:4000/api/students/${user.id}`, {
+        const res = await fetch(`${BASE_URL}/api/students/${user.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
