@@ -29,9 +29,10 @@ export default function EndRide() {
       // 🧩 Simulation constants (same as backend)
       const HARDCODE_GUARD = "34f61b72-b463-4e88-abab-011ca0ecea17";
       const HARDCODE_STATION = "82684c80-c1ac-4253-9fac-514d8049491f";
+      const BASE_URL = import.meta.env.VITE_API_URL;
 
       // ✅ Step 1: Generate new QR for end guard/station
-      const qrRes = await fetch("http://localhost:4000/api/guard/generate-qr", {
+      const qrRes = await fetch(`${BASE_URL}/api/guard/generate-qr`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,8 +47,8 @@ export default function EndRide() {
       }
 
       // ✅ Step 2: End the ride
-      const endRes = await fetch("http://localhost:4000/api/rental/end", {
-        method: "PATCH", // 🔥 Correct HTTP method
+      const endRes = await fetch(`${BASE_URL}/api/rental/end`, {
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           session_id: ride.session_id,

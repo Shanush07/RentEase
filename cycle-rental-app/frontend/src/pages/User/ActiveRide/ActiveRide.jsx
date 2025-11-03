@@ -31,7 +31,8 @@ export default function ActiveRide() {
 
     const fetchActiveRide = async () => {
       try {
-        const url = `http://localhost:4000/api/rental/active/${studentId}`;
+        const BASE_URL = import.meta.env.VITE_API_URL;
+        const url = `${BASE_URL}/api/rental/active/${studentId}`;
         console.log("🚀 Fetching Active Ride from:", url);
 
         const res = await fetch(url);
