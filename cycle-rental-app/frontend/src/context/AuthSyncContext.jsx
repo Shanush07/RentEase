@@ -9,11 +9,14 @@ export const AuthSyncProvider = ({ children }) => {
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // 🔹 Backend base URL
+  const BASE_URL = "https://rentease-backend-oxc9.onrender.com";
+
   // 🔹 Sync student with backend (create if not exists)
   const syncStudent = async () => {
     try {
       const token = await getToken({ template: "default" });
-      await axios.post("http://localhost:4000/api/students/sync", {}, {
+      await axios.post(`${BASE_URL}/api/students/sync`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log("✅ Student synced successfully");
@@ -26,7 +29,7 @@ export const AuthSyncProvider = ({ children }) => {
   const fetchStudent = async () => {
     try {
       const token = await getToken({ template: "default" });
-      const res = await axios.get("http://localhost:4000/api/students/me", {
+      const res = await axios.get(`${BASE_URL}/api/students/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setStudent(res.data);
