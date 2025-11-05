@@ -4,13 +4,13 @@ import prisma from "../prisma.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 /**
- * Create Stripe checkout session for unpaid rides
+ * 💳 Create Stripe checkout session for unpaid rides
  */
 export const createCheckoutSession = async (req, res) => {
   try {
     const { student_id } = req.body;
 
-    // ✅ Fetch unpaid payments via related RentalSession
+    // ✅ Fetch unpaid payments
     const unpaidPayments = await prisma.payment.findMany({
       where: {
         session: {
@@ -61,10 +61,11 @@ export const createCheckoutSession = async (req, res) => {
 };
 
 /**
- * Webhook - Stripe calls this after payment success
+ * 🧾 Stripe Webhook — Automatically marks payments as PAID and ends rides
  */
 export const handleStripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
+
   try {
     const event = stripe.webhooks.constructEvent(
       req.body,
@@ -76,8 +77,10 @@ export const handleStripeWebhook = async (req, res) => {
       const session = event.data.object;
       const studentId = session.metadata.student_id;
 
-      // ✅ Update all unpaid payments for this student's sessions
-      await prisma.payment.updateMany({
+      console.log(`✅ Payment success for student ${studentId}`);
+
+      // ✅ Step 1: Mark all unpaid payments as PAID
+      const updatedPayments = await prisma.payment.updateMany({
         where: {
           session: {
             student_id: studentId,
@@ -86,6 +89,22 @@ export const handleStripeWebhook = async (req, res) => {
         },
         data: { status: "PAID" },
       });
+
+      // ✅ Step 2: End corresponding rides
+      await prisma.rentalSession.updateMany({
+        where: {
+          student_id: studentId,
+          status: "PENDING",
+        },
+        data: {
+          status: "COMPLETED",
+          end_time: new Date(),
+        },
+      });
+
+      console.log(
+        `✅ Updated ${updatedPayments.count} payments & ended rides for student ${studentId}`
+      );
     }
 
     res.json({ received: true });
