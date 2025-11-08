@@ -67,6 +67,9 @@ export default function Navbar() {
           <li>
             <Link to="/summary" onClick={handleLinkClick}>Previous Rides</Link>
           </li>
+          <li>
+            <Link to="/payment" onClick={handleLinkClick}>Payment</Link>
+          </li>
           {onDashboard && (
             <li>
               <a href="#contact" onClick={scrollToSection("contact")}>
@@ -117,6 +120,7 @@ export default function Navbar() {
           <Link to="/book" onClick={handleLinkClick}>Book a Ride</Link>
           <Link to="/active" onClick={handleLinkClick}>Active Rides</Link>
           <Link to="/summary" onClick={handleLinkClick}>Previous Rides</Link>
+          <Link to="/payment" onClick={handleLinkClick}>Payment</Link>
           {onDashboard && (
             <a href="#contact" onClick={scrollToSection("contact")}>
               Contact Us

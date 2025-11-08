@@ -20,6 +20,7 @@ import ActiveRidesPage from "./pages/User/ActiveRide/ActiveRide";
 import PreviousRidesPage from "./pages/User/RideSummary/RideSummary";
 import EndRide from "./pages/User/EndRide/EndRide";
 import BookRide from "./pages/User/BookRide/BookRide";
+import PaymentPage from "./pages/User/PaymentPage/PaymentPage";
 import "./App.css";
 
 function ScrollToTop() {
@@ -87,6 +88,15 @@ export default function App() {
             </SignedIn>
           }
         />
+        <Route
+          path="/payment"
+          element={
+            <SignedIn>
+              <PaymentPage />
+            </SignedIn>
+          }
+        />
+
 
         {/* 🔐 Auth pages */}
         <Route path="/sign-in/*" element={<SignIn routing="path" path="/sign-in" />} />

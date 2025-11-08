@@ -14,13 +14,28 @@ const app = express();
 // 1. CORS
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL_USER || "http://localhost:5173",
-      process.env.FRONTEND_URL_GUARD || "http://localhost:5174",
-    ],
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        process.env.FRONTEND_URL_USER,
+        process.env.FRONTEND_URL_GUARD,
+        "http://localhost:5173",
+        "http://localhost:5174",
+      ];
+
+      // allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn(`❌ CORS blocked request from origin: ${origin}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
 
 // 2. Stripe webhook first (raw body)
 app.use("/api/payments/webhook", express.raw({ type: "application/json" }), paymentRoutes);
